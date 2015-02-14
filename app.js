@@ -55,7 +55,7 @@ app.get('/login', function (req, res) {
 
 app.get('/', function (req, res) {
     if(!req.isAuthenticated()){
-        res.redirect('/login');
+        return res.redirect('/login');
     }
     res.render('index');
 });
