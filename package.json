@@ -16,6 +16,12 @@
     "morgan": "~1.5.1",
     "passport": "^0.2.1",
     "passport-google": "^0.3.0",
+    "react": "^0.12.2",
     "serve-favicon": "~2.2.0"
+  },
+  "devDependencies": {
+    "css-loader": "^0.9.1",
+    "jsx-loader": "^0.12.2",
+    "style-loader": "^0.8.3"
   }
 }
