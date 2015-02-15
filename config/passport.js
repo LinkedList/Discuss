@@ -1,6 +1,7 @@
 var GoogleStrategy = require('passport-google').Strategy;
+var passport = require('passport');
 
-var passportConfig = function(db, passport) {
+var passportConfig = function(db) {
     passport.use(new GoogleStrategy({
         returnURL: 'http://localhost:3000/auth/google/return',
         realm: 'http://localhost:3000'
