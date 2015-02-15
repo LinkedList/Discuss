@@ -11,7 +11,7 @@ var session = require('express-session');
 var app = express();
 
 //initialize db
-var db = mongojs("nmdiscuss")
+var db = mongojs("nmdiscuss");
 
 require('./config/passport')(db, passport);
 

@@ -14,11 +14,11 @@ var passportConfig = function(db, passport) {
            }
 
            if(!user) {
-               var user = {
+               user = {
                    name: profile.displayName,
                    email: profile.emails[0].value,
                    googleId: identifier
-               }
+               };
 
                users.save(user, function(err, user) {
                     if(err) console.log(err);
@@ -37,6 +37,6 @@ var passportConfig = function(db, passport) {
     passport.deserializeUser(function(user, done){
         done(null, user);
     });
-}
+};
 
 module.exports = passportConfig;

@@ -43,7 +43,7 @@ var restRoute = function (db, col) {
         return res.send(err);
       }
 
-      for(prop in req.body) {
+      for(var prop in req.body) {
         doc[prop] = req.body[prop];
       }
 
@@ -66,6 +66,6 @@ var restRoute = function (db, col) {
     });
   });
   return router;
-}
+};
 
 module.exports = restRoute;
