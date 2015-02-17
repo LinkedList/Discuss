@@ -1,4 +1,10 @@
 extends layout
 
+block head
+	link(rel='stylesheet', href='/css/login.css')
+
 block content
-	a(href='/auth/google') Login with Google
+	div.header
+		h1 Welcome to NMDiscuss
+	div.content
+			a.g-signin(href='/auth/google')

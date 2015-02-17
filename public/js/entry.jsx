@@ -2,8 +2,12 @@ var React = require('react');
 require('../css/styles.css');
 
 React.render(
-		<div className="header">
-			<h1>Welcome to NMDiscuss</h1>
+		<div>
+			<div className="header">
+				<h1>Welcome to NMDiscuss</h1>
+			</div>
+			<div className="content">
+			</div>
 		</div>,
-		document.getElementById('main-content')
+		document.body
 		);
