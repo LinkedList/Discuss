@@ -8,15 +8,17 @@
 }
 
 .header {
-	margin: 0;
-	color: #333;
-	text-align: center;
-	padding: 2.5em 2em 0;
-	border-bottom: 1px solid #eee;
+	display:block;
+	border-bottom-color:black;
+	border-radius:0px;
 }
 
-.header h1 {
-	margin: 0.2em 0;
-	font-size: 3em;
-	font-weight: 300;
+.pure-menu-link {
+	padding: 1em 1em;
+}
+
+p {
+	font-family: Georgia, "Cambria", serif;
+	line-height: 1.8em;
+	color: rgb(68, 68, 68);
 }

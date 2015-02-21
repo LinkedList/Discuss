@@ -1,13 +1,49 @@
-var React = require('react');
+"use strict";
 require('../css/styles.css');
+var React = require('react');
 
-React.render(
-		<div>
+var Router = require('react-router');
+var {RouteHandler, Route, Link, State } = Router;
+
+var About = require('./about.jsx');
+
+var App = React.createClass({
+	mixins:[State],
+	render: function () {
+		return (
 			<div className="header">
-				<h1>Welcome to NMDiscuss</h1>
+				<div className="pure-menu pure-menu-horizontal">
+					<Link to="app" className="pure-menu-heading">NMDiscuss</Link>
+					<ul className="pure-menu-list">
+						<li className={this.activeRoute('about')}>
+							<Link to="about" className="pure-menu-link">About</Link>
+						</li>
+					</ul>
+				</div>
+				<div className="content">
+					<RouteHandler />
+				</div>
 			</div>
-			<div className="content">
-			</div>
-		</div>,
-		document.body
 		);
+	},
+
+	/*
+	 * returns css styles for top menu links, selected if the route is active
+	 */
+	activeRoute: function (route) {
+		return this.isActive(route) ? 
+			"pure-menu-item pure-menu-selected" : 
+			"pure-menu-item";
+	}
+
+});
+
+var routes = (
+	<Route name="app" path="/" handler={App}>
+		<Route name="about" handler={About} />
+	</Route>
+);
+
+Router.run(routes, function(Handler){
+	React.render(<Handler />, document.body);
+});
