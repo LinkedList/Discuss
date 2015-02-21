@@ -22,3 +22,19 @@ p {
 	line-height: 1.8em;
 	color: rgb(68, 68, 68);
 }
+
+.index-table {
+	width: 50%;
+}
+
+.delete-button { 
+	width: 43px;
+}
+
+.index-edit {
+	width:100%;
+}
+
+.submit{ 
+	margin-left: 0.5em;
+}
