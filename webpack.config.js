@@ -1,4 +1,5 @@
 var path = require('path');
+var webpack = require('webpack');
 
 var jsPath = path.join(__dirname, 'public', 'js');
 
@@ -13,5 +14,8 @@ module.exports = {
             { test: /\.css$/, loader: "style!css" },
             { test: /\.jsx$/, loader: "jsx-loader?harmony"}
         ]
-    }
+    },
+    plugins: [
+        new webpack.optimize.UglifyJsPlugin()
+    ]
 };
