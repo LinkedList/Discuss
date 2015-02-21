@@ -1,6 +1,7 @@
 "use strict";
 require('../css/styles.css');
 var React = require('react');
+var Reflux = require('reflux');
 
 var Router = require('react-router');
 var {RouteHandler, Route, Link, State } = Router;
@@ -8,8 +9,22 @@ var {RouteHandler, Route, Link, State } = Router;
 var About = require('./views/About.jsx');
 var Index = require('./views/Index.jsx');
 
+var SessionActions = require('./actions/SessionActions');
+var SessionStore = require('./stores/SessionStore');
+
 var App = React.createClass({
-	mixins:[State],
+	mixins:[State, Reflux.connect(SessionStore, "user")],
+
+	getInitialState: function () {
+		return {
+			user: {name: ""}
+		};
+	},
+
+	componentDidMount: function () {
+		SessionActions.getUser();
+	},
+
 	render: function () {
 		return (
 			<div className="header">
@@ -21,6 +36,9 @@ var App = React.createClass({
 						</li>
 						<li className={this.activeRoute('about')}>
 							<Link to="about" className="pure-menu-link">About</Link>
+						</li>
+						<li className="pure-menu-item">
+							<a className="pure-menu-link" href="#">Logged in as {this.state.user.name}</a>
 						</li>
 					</ul>
 				</div>

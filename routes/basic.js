@@ -13,6 +13,10 @@ var routes = function (db) {
     res.render('login');
   });
 
+  router.get('/user', requiresLogin, function (req, res) {
+    res.json(req.session.passport.user);
+  });
+
   router.get('/', requiresLogin, function (req, res) {
     res.render('index');
   });

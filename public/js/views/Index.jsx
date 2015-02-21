@@ -7,19 +7,12 @@ var IndexActions = require('../actions/IndexActions');
 var IndexItem = require('./IndexItem.jsx');
 
 var Index = React.createClass({
-	mixins: [Reflux.ListenerMixin],
+	mixins: [Reflux.connect(IndexStore, "indexes")],
 	getInitialState: function () {
 		return {indexes: []};
 	},
 
-	indexes: function (indexes) {
-		this.setState({
-			indexes: indexes
-		});
-	},
-
 	componentDidMount: function () {
-		this.listenTo(IndexStore, this.indexes);
 		IndexActions.loadIndexes();
 	},
 
