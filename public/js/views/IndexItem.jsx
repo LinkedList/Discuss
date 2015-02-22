@@ -2,7 +2,7 @@
 
 var React = require('react');
 var Reflux = require('reflux');
-var IndexActions = require('../actions/IndexActions');
+var IndexActions = require('../actions/GeneralActions');
 
 var IndexItem = React.createClass({
 	getInitialState: function () {
@@ -37,7 +37,7 @@ var IndexItem = React.createClass({
 
 	onDelete: function(e) {
 		e.preventDefault();
-		IndexActions.deleteIndex(this.props._id);
+		IndexActions.delete(this.props._id);
 	},
 
 	componentDidUpdate: function (a, b) {
@@ -51,7 +51,7 @@ var IndexItem = React.createClass({
 	onKeyDown: function (e) {
 		if(e.keyCode === 13) {
 			var name = this.refs.edit.getDOMNode().value;
-			IndexActions.updateIndex(this.props._id, name);
+			IndexActions.update(this.props._id, {name: name});
 			this.setState({edit: false});
 		} else if(e.keyCode === 27) {
 			this.setState({edit: false});

@@ -1,3 +1,4 @@
+"use strict";
 var router = require('express').Router();
 var passport = require('passport');
 var requiresLogin = require('../middlewares/login').requiresLogin;
@@ -21,7 +22,11 @@ var routes = function (db) {
     res.render('index');
   });
 
-  router.use('/api', requiresLogin, require('./rest')(db, 'index'));
+  var API_ROUTES = ['index', 'threads', 'posts', 'groups'];
+
+  API_ROUTES.forEach(function(route) {
+    router.use('/api', requiresLogin, require('./rest')(db, route));
+  });
 
   return router;
 };

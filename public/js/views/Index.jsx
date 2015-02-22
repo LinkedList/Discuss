@@ -2,9 +2,10 @@
 
 var React = require('react');
 var Reflux = require('reflux');
-var IndexStore = require('../stores/IndexStore');
-var IndexActions = require('../actions/IndexActions');
 var IndexItem = require('./IndexItem.jsx');
+
+var IndexActions = require('../actions/GeneralActions');
+var IndexStore = require('../stores/GeneralStore');
 
 var Index = React.createClass({
 	mixins: [Reflux.connect(IndexStore, "indexes")],
@@ -13,7 +14,7 @@ var Index = React.createClass({
 	},
 
 	componentDidMount: function () {
-		IndexActions.loadIndexes();
+		IndexActions.load();
 	},
 
 	render: function () {
@@ -39,7 +40,7 @@ var Index = React.createClass({
 	onSubmit: function (e) {
 		e.preventDefault();
 		var name = this.refs.name.getDOMNode().value;
-		IndexActions.submitIndex(name);
+		IndexActions.add({name: name});
 		this.refs.name.getDOMNode().value = "";
 	},
 	
