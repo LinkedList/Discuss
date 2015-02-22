@@ -1,3 +1,7 @@
+body {
+	font-family: Ubuntu, sans-serif;
+}
+
 .content {
 	margin: 0 auto;
 	padding: 0 2em;
@@ -18,7 +22,6 @@
 }
 
 p {
-	font-family: Georgia, "Cambria", serif;
 	line-height: 1.8em;
 	color: rgb(68, 68, 68);
 }
