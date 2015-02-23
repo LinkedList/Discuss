@@ -4,18 +4,24 @@ var webpack = require('webpack');
 var jsPath = path.join(__dirname, 'public', 'js');
 
 module.exports = {
-    entry: path.join(jsPath, "entry.jsx"),
+    entry: [
+        'webpack-dev-server/client?http://localhost:3000',
+        'webpack/hot/only-dev-server',
+        path.join(jsPath, "entry.jsx")
+    ],
     output: {
         path: jsPath,
-        filename: "bundle.js"
+        filename: "bundle.js",
+        publicPath: 'http://localhost:3000/_assets/'
     },
     module: {
         loaders: [
             { test: /\.css$/, loader: "style!css" },
-            { test: /\.jsx$/, loader: "jsx-loader?harmony"}
+            { test: /\.jsx$/, loaders: ['react-hot', "jsx?harmony"], exclude: /node_modules/}
         ]
     },
     plugins: [
-        //new webpack.optimize.UglifyJsPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoErrorsPlugin()
     ]
 };
