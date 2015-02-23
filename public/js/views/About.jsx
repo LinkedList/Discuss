@@ -5,7 +5,7 @@ var About  = React.createClass({
 	render: function () {
 		return (
 				<p>
-					NMDiscuss is a new discussion platform written with Mongo, Express and React.
+					Discuss is a new discussion platform written with Mongo, Express and React.
 				</p>
 		);
 	}
