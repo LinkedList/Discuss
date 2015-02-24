@@ -1,10 +1,11 @@
 var GoogleStrategy = require('passport-google').Strategy;
 var passport = require('passport');
+var properties = require('./properties');
 
 var passportConfig = function(db) {
     passport.use(new GoogleStrategy({
-        returnURL: 'http://localhost:3000/auth/google/return',
-        realm: 'http://localhost:3000'
+        returnURL: properties.base + '/auth/google/return',
+        realm: properties.base
     },
     function(identifier, profile, done) {
        var users = db.collection('users');
