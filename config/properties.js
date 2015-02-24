@@ -1,5 +1,10 @@
+
+var baseUrl = "http://localhost";
+var port = 8080;
+
+
 module.exports = {
-    baseUrl: "http://localhost",
-    port: 8080,
-    base: this.baseUrl + ":" + this.port
+    baseUrl: baseUrl,
+    port: port,
+    base: baseUrl + ":" + port
 }
