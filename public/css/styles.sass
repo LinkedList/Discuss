@@ -1,0 +1,59 @@
+$font-family: Ubuntu, sans-serif;
+$primary-color: rgb(70, 190, 115);
+$white: #FFFFFF;
+
+body {
+	font-family: $font-family;
+}
+
+.header {
+	background: $primary-color;
+	display:block;
+    color: $white;
+
+    .pure-menu-item {
+
+      .link {
+        color: $white;
+        padding: 1em 1em;
+        display:block;
+        text-decoration: none;
+        white-space: nowrap;
+
+        &:hover {
+          color: $primary-color;
+          background: $white;
+        }
+      }
+    }
+
+    .pure-menu-selected {
+      .link {
+        color: $primary-color;
+        background: $white;
+      }
+    }
+}
+
+
+
+.content {
+	margin: 0 auto;
+	padding: 1em 2em;
+	max-width: 1200px;
+	min-width: 700px;
+	margin-bottom: 50px;
+	line-height: 1.6em;
+}
+
+.user-info {
+	margin-left: 1em;
+}
+
+.front-posts {
+	width: 100%;
+
+    .front-post {
+        border-left: 0.5em solid $primary-color;
+    }
+}

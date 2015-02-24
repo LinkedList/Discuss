@@ -1,5 +1,5 @@
 "use strict";
-require('../css/styles.css');
+require('../css/styles.sass');
 var React = require('react');
 var Reflux = require('reflux');
 
