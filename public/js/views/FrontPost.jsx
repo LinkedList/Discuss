@@ -6,18 +6,19 @@ var GeneralActions = require('../actions/GeneralActions');
 
 var FrontPost = React.createClass({
 	render: function () {
+		var date = new Date(this.props.timestamp);
 		return (
-				<tr className="front-post">
-					<td>
+				<div className="front-post">
+					<span className="front-post-text">
 						{this.props.text}
-					</td>
-					<td>
+					</span>
+					<span className="front-post-user">
 						{this.props.user}
-					</td>
-					<td>
-						{this.props.timestamp}
-					</td>
-				</tr>
+					</span>
+					<span className="front-post-date">
+						{date.toDateString()}
+					</span>
+				</div>
 		);
 	}
 });

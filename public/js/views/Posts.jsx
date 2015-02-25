@@ -26,9 +26,9 @@ var Posts = React.createClass({
 		return (
 			<div>
 				<h1>Latest posts</h1>
-				<table className="front-posts pure-table pure-table-horizontal">
+				<div className="front-posts">
 					{posts}
-				</table>
+				</div>
 			</div>
 		);
 	}

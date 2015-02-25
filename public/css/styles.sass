@@ -1,6 +1,7 @@
 $font-family: Ubuntu, sans-serif;
 $primary-color: rgb(70, 190, 115);
 $white: #FFFFFF;
+$gray: #cbcbcb;
 
 body {
     font-family: $font-family;
@@ -54,6 +55,31 @@ body {
     width: 100%;
 
     .front-post {
-        border-left: 0.5em solid $primary-color;
+        border: 0.1em solid $gray;
+        border-left: 0.2em solid $primary-color;
+        clear:both;
+        overflow: hidden;
+        margin-bottom: 0.5em;
+        padding: 0.1em;
+
+        &:hover {
+            background: lighten($primary-color, 40%);
+        }
+    }
+
+    .front-post-text {
+        display: box;
+        float: left;
+    }
+
+    .front-post-user {
+        float: left;
+        clear: left;
+    }
+
+    .front-post-date {
+        float: right;
+        clear:right;
+        margin-right:0.5em;
     }
 }
