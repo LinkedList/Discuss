@@ -13,6 +13,7 @@ var FrontPost = React.createClass({
 						{this.props.text}
 					</span>
 					<span className="front-post-user">
+						<img src={this.props.img} />
 						{this.props.user}
 					</span>
 					<span className="front-post-date">

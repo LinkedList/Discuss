@@ -20,7 +20,7 @@ var Posts = React.createClass({
 	render: function () {
 		var posts = this.state.posts.map(function(p){
 			return (
-					<FrontPost key={p._id} text={p.text} user={p.user} timestamp={p.timestamp} />
+					<FrontPost key={p._id} img={p.user_img} text={p.text} user={p.user} timestamp={p.timestamp} />
 			);
 		});
 		return (
