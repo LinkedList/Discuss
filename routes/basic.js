@@ -1,7 +1,9 @@
+/*jslint node: true */
 "use strict";
 var router = require('express').Router();
 var passport = require('passport');
 var requiresLogin = require('../middlewares/login').requiresLogin;
+var seeder = require('../models/seeder');
 
 var routes = function (db) {
   router.get('/auth/google', passport.authenticate('google'));
@@ -20,6 +22,20 @@ var routes = function (db) {
 
   router.get('/', requiresLogin, function (req, res) {
     res.render('index');
+  });
+
+  router.get('/seeder/users/:number', requiresLogin, function (req, res) {
+    seeder.users(function(users) {
+      var usersTable = db.collection('users');
+      usersTable.insert(users, function (err, docs) {
+        if(err) {
+          return res.send(err);
+        }
+
+        res.json(users);
+      });
+
+    }, req.params.number);
   });
 
   var API_ROUTES = ['index', 'threads', 'posts', 'groups'];
