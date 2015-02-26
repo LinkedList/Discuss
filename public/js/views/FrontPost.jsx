@@ -7,14 +7,16 @@ var GeneralActions = require('../actions/GeneralActions');
 var FrontPost = React.createClass({
 	render: function () {
 		var date = new Date(this.props.timestamp);
+		var user = this.props.user;
+		console.log(user);
 		return (
 				<div className="front-post">
 					<span className="front-post-text">
 						{this.props.text}
 					</span>
+					<img className="front-post-user-image" src={typeof user !== 'undefined' ? user.picture.thumbnail : "#"} />
 					<span className="front-post-user">
-						<img src={this.props.img} />
-						{this.props.user}
+						{typeof user !== 'undefined' ? user.name.first + " " + user.name.last : "Undefined"}
 					</span>
 					<span className="front-post-date">
 						{date.toDateString()}

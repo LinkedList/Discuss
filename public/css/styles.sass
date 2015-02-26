@@ -61,6 +61,7 @@ body {
         overflow: hidden;
         margin-bottom: 0.5em;
         padding: 0.1em;
+        padding-left:0.2em;
 
         &:hover {
             background: lighten($primary-color, 40%);
@@ -68,20 +69,23 @@ body {
     }
 
     .front-post-text {
+        max-width: 1000px;
         display: box;
         float: left;
+        margin-bottom:1em;
+    }
+
+    .front-post-user-image {
+        float: left;
+        clear: left;
+        height: 1.5em;
+        width: 1.5em;
+        padding-right:0.1em;
+        border: none;
     }
 
     .front-post-user {
         float: left;
-        clear: left;
-
-        img {
-            height: 1.5em;
-            width: 1.5em;
-            padding-right:0.1em;
-            border: none;
-        }
     }
 
     .front-post-date {

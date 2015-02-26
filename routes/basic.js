@@ -75,11 +75,11 @@ var routes = function (db) {
 
           res.json(doc);
         });
-      }, users)
-    })
+      }, users);
+    });
   });
 
-  var API_ROUTES = ['index', 'threads', 'posts', 'groups'];
+  var API_ROUTES = ['index', 'threads', 'posts', 'groups', 'users'];
 
   API_ROUTES.forEach(function(route) {
     router.use('/api', requiresLogin, require('./rest')(db, route));
