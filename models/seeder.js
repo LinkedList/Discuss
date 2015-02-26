@@ -31,7 +31,8 @@ var postSeeder = function (callback, user) {
         .get(RANDOM_TEXT_API)
         .end(function(res){
             var post = {};
-            post.text = res.body.text_out;
+            var text_out = res.body.text_out.substr(3);
+            post.text = text_out.substr(0, text_out.length - 5);
             post.user = user.name.first + " " + user.name.last;
             post.user_id = user._id;
             post.timestamp = new Date();
