@@ -8,7 +8,6 @@ var FrontPost = React.createClass({
 	render: function () {
 		var date = new Date(this.props.timestamp);
 		var user = this.props.user;
-		console.log(user);
 		return (
 				<div className="front-post">
 					<span className="front-post-text">
