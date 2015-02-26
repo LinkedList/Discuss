@@ -4,6 +4,7 @@ var router = require('express').Router();
 var passport = require('passport');
 var requiresLogin = require('../middlewares/login').requiresLogin;
 var seeder = require('../models/seeder');
+var ObjectId = require('mongojs').ObjectId;
 
 var routes = function (db) {
   router.get('/auth/google', passport.authenticate('google'));
@@ -26,8 +27,8 @@ var routes = function (db) {
 
   router.get('/seeder/users/:number', requiresLogin, function (req, res) {
     seeder.users(function(users) {
-      var usersTable = db.collection('users');
-      usersTable.insert(users, function (err, docs) {
+      var usersCol = db.collection('users');
+      usersCol.insert(users, function (err, docs) {
         if(err) {
           return res.send(err);
         }
@@ -36,6 +37,46 @@ var routes = function (db) {
       });
 
     }, req.params.number);
+  });
+
+  router.get('/seeder/post/:user_id', requiresLogin, function (req, res) {
+    var usersCol = db.collection('users');
+    usersCol.findOne({_id: ObjectId(req.params.user_id)}, function (err, user) {
+      if(err) {
+        return res.send(err);
+      }
+
+      seeder.post(function(post){
+        var postsCol = db.collection('posts');
+        postsCol.insert(post, function (err, doc) {
+          if(err) {
+            return res.send(err);
+          }
+
+          res.json(doc);
+        });
+      }, user)
+    })
+  });
+
+  router.get('/seeder/randompost', requiresLogin, function (req, res) {
+    var usersCol = db.collection('users');
+    usersCol.find({}, function (err, users) {
+      if(err) {
+        return res.send(err);
+      }
+
+      seeder.randomPost(function(post){
+        var postsCol = db.collection('posts');
+        postsCol.insert(post, function (err, doc) {
+          if(err) {
+            return res.send(err);
+          }
+
+          res.json(doc);
+        });
+      }, users)
+    })
   });
 
   var API_ROUTES = ['index', 'threads', 'posts', 'groups'];
