@@ -1,14 +1,15 @@
 var GoogleStrategy = require('passport-google').Strategy;
 var passport = require('passport');
 var properties = require('./properties');
+var ObjectId = require('mongojs').ObjectId;
 
 var passportConfig = function(db) {
+    var users = db.collection('users');
     passport.use(new GoogleStrategy({
         returnURL: properties.base + '/auth/google/return',
         realm: properties.base
     },
     function(identifier, profile, done) {
-       var users = db.collection('users');
 
        users.findOne({googleId: identifier}, function (err, user) {
            if(err) {
@@ -17,10 +18,15 @@ var passportConfig = function(db) {
 
            if(!user) {
                user = {
-                   name: profile.displayName,
+                   name: {
+                       first: profile.name.givenName,
+                       last: profile.name.familyName
+                   },
                    email: profile.emails[0].value,
                    googleId: identifier
                };
+
+               console.log(profile);
 
                users.save(user, function(err, user) {
                     if(err) console.log(err);
@@ -33,11 +39,13 @@ var passportConfig = function(db) {
     }));
 
     passport.serializeUser(function(user, done){
-        done(null, user);
+        done(null, user._id);
     });
 
-    passport.deserializeUser(function(user, done){
-        done(null, user);
+    passport.deserializeUser(function(_id, done){
+        users.findOne({_id: ObjectId(_id)}, function (err, user) {
+            done(err, user);
+        });
     });
 };
 

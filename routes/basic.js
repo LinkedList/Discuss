@@ -17,6 +17,11 @@ var routes = function (db) {
     res.render('login');
   });
 
+  router.get('/logout', function (req, res) {
+    req.logout();
+    res.redirect('/');
+  });
+
   router.get('/user', requiresLogin, function (req, res) {
     res.json(req.session.passport.user);
   });
@@ -55,8 +60,8 @@ var routes = function (db) {
 
           res.json(doc);
         });
-      }, user)
-    })
+      }, user);
+    });
   });
 
   router.get('/seeder/randompost', requiresLogin, function (req, res) {
