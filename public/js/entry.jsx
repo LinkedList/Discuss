@@ -7,7 +7,6 @@ var Router = require('react-router');
 var {RouteHandler, Route, Link, State, DefaultRoute} = Router;
 
 var About = require('./views/About.jsx');
-var Index = require('./views/Index.jsx');
 var Posts = require('./views/Posts.jsx');
 var Header = require('./views/Header.jsx');
 
