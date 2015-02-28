@@ -21,11 +21,11 @@ var App = React.createClass({
 
 	getInitialState: function () {
 		return {
-			user: {name: ""}
+			user: {name: {first: "", last: ""}}
 		};
 	},
 
-	componentDidMount: function () {
+	componentWillMount() {
 		SessionActions.getUser();
 	},
 
