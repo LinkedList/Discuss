@@ -17,7 +17,7 @@ var Header = React.createClass({
 						<Link to="about" className="link">About</Link>
 					</li>
 					<li className="pure-menu-item">
-						<div className="user-info">{this.props.user.name}</div>
+						<div className="user-info">{this.props.user.name.first + " " + this.props.user.name.last} </div>
 					</li>
 				</ul>
 			</div>

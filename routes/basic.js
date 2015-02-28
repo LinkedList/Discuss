@@ -13,7 +13,14 @@ var routes = function (db) {
   router.use('/', authRoutes);
 
   router.get('/user', requiresLogin, function (req, res) {
-    res.json(req.session.passport.user);
+    var usersCol = db.collection('users');
+    usersCol.findOne({_id: new ObjectId(req.session.passport.user)}, function (err, user) {
+      if(err) {
+        return res.send(err);
+      }
+
+      res.json(user);
+    });
   });
 
   router.get('/', requiresLogin, function (req, res) {
@@ -36,7 +43,7 @@ var routes = function (db) {
 
   router.get('/seeder/post/:user_id', requiresLogin, function (req, res) {
     var usersCol = db.collection('users');
-    usersCol.findOne({_id: ObjectId(req.params.user_id)}, function (err, user) {
+    usersCol.findOne({_id: new ObjectId(req.params.user_id)}, function (err, user) {
       if(err) {
         return res.send(err);
       }
