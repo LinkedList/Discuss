@@ -17,16 +17,18 @@ var passportConfig = function(db) {
            }
 
            if(!user) {
+               var icon = profile.photos === undefined ? "/img/default_user.png" : profile.photos[0];
                user = {
                    name: {
                        first: profile.name.givenName,
                        last: profile.name.familyName
                    },
+                   picture: {
+                       thumbnail: icon
+                   },
                    email: profile.emails[0].value,
                    googleId: identifier
                };
-
-               console.log(profile);
 
                users.save(user, function(err, user) {
                     if(err) console.log(err);
