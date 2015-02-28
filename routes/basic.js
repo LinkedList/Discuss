@@ -5,6 +5,7 @@ var passport = require('passport');
 var requiresLogin = require('../middlewares/login').requiresLogin;
 var seeder = require('../models/seeder');
 var ObjectId = require('mongojs').ObjectId;
+var properties = require('../config/properties');
 
 var routes = function (db) {
   router.get('/auth/google', passport.authenticate('google'));
@@ -14,7 +15,8 @@ var routes = function (db) {
   }));
 
   router.get('/login', function (req, res) {
-    res.render('login');
+    console.log(process.env.APP_NAME);
+    res.render('login', {name : properties.appName});
   });
 
   router.get('/logout', function (req, res) {

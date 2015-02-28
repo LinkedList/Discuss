@@ -14,6 +14,8 @@ var Header = require('./views/Header.jsx');
 var SessionActions = require('./actions/SessionActions');
 var SessionStore = require('./stores/SessionStore');
 
+var APP_NAME = document.body.dataset.appName;
+
 var App = React.createClass({
 	mixins:[State, Reflux.connect(SessionStore, "user")],
 
@@ -30,7 +32,7 @@ var App = React.createClass({
 	render: function () {
 		return (
 			<div className="page">
-				<Header user={this.state.user}/>
+				<Header user={this.state.user} appName={APP_NAME}/>
 				<div className="content">
 					<RouteHandler />
 				</div>
