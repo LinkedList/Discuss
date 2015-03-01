@@ -21,7 +21,7 @@ var Header = React.createClass({
 					</li>
 				</ul>
 				<ul className="right pure-menu-list">
-					<li className="pure-menu-item">
+					<li className={this.activeRoute('user')}>
 						<Link to="user" params={{id: user._id}} className="link user-info">
 							<img className="user-image" src={typeof user !== "undefined" ? user.picture.thumbnail : "#"} />
 							{this.props.user.name.first + " " + this.props.user.name.last}
