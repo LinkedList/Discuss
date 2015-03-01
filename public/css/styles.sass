@@ -1,16 +1,41 @@
+@import './font-awesome/scss/font-awesome';
 $font-family: Ubuntu, sans-serif;
 $primary-color: rgb(70, 190, 115);
 $white: #FFFFFF;
 $gray: #cbcbcb;
 
+@mixin vertical-align {
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
 body {
     font-family: $font-family;
 }
+
 
 .header {
     background: $primary-color;
     display:block;
     color: $white;
+
+    .right {
+        padding-right: 1em;
+        float:right;
+
+        .user-image {
+            float: left;
+            height: 1.5em;
+            width: 1.5em;
+            border: none;
+            margin-right:0.5em;
+            position:relative;
+            bottom: 0.2em;
+        }
+    }
 
     .pure-menu-item {
 
@@ -36,7 +61,10 @@ body {
     }
 }
 
-
+.signout {
+    @extend .fa; 
+    @extend .fa-sign-out; 
+}
 
 .content {
     margin: 0 auto;

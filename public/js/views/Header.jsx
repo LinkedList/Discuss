@@ -6,6 +6,7 @@ var {RouteHandler, Route, Link, State, DefaultRoute} = Router;
 var Header = React.createClass({
 	mixins: [State],
 	render: function () {
+		var user = this.props.user;
 		return (
 			<div className="header pure-menu pure-menu-horizontal">
 				<Link to="app" className="pure-menu-heading">{this.props.appName}</Link>
@@ -16,8 +17,16 @@ var Header = React.createClass({
 					<li className={this.activeRoute('about')}>
 						<Link to="about" className="link">About</Link>
 					</li>
+				</ul>
+				<ul className="right pure-menu-list">
 					<li className="pure-menu-item">
-						<div className="user-info">{this.props.user.name.first + " " + this.props.user.name.last} </div>
+						<Link to="posts" className="link user-info">
+							<img className="user-image" src={typeof user !== "undefined" ? user.picture.thumbnail : "#"} />
+							{this.props.user.name.first + " " + this.props.user.name.last}
+						</Link>
+					</li>
+					<li className="pure-menu-item">
+						<a className="link" href="/logout" title="Logout"><i className="signout"></i></a>
 					</li>
 				</ul>
 			</div>

@@ -20,7 +20,12 @@ var App = React.createClass({
 
 	getInitialState: function () {
 		return {
-			user: {name: {first: "", last: ""}}
+			user: {
+				name: {first: "", last: ""},
+				picture: {
+					thumbnail: "#"
+				}
+			}
 		};
 	},
 
