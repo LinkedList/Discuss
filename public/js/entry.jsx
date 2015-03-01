@@ -1,3 +1,4 @@
+/*jslint node: true */
 "use strict";
 require('../css/styles.sass');
 var React = require('react');
@@ -9,6 +10,7 @@ var {RouteHandler, Route, Link, State, DefaultRoute} = Router;
 var About = require('./views/About.jsx');
 var Posts = require('./views/Posts.jsx');
 var Header = require('./views/Header.jsx');
+var Profile = require('./views/Profile.jsx');
 
 var SessionActions = require('./actions/SessionActions');
 var SessionStore = require('./stores/SessionStore');
@@ -50,6 +52,7 @@ var routes = (
 		<DefaultRoute handler={Posts} />
 		<Route name="posts2" handler={Posts} />
 		<Route name="about" handler={About} />
+		<Route name="profile" handler={Profile} />
 	</Route>
 );
 
