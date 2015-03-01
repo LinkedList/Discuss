@@ -20,7 +20,7 @@ var Header = React.createClass({
 				</ul>
 				<ul className="right pure-menu-list">
 					<li className="pure-menu-item">
-						<Link to="posts" className="link user-info">
+						<Link to="posts2" className="link user-info">
 							<img className="user-image" src={typeof user !== "undefined" ? user.picture.thumbnail : "#"} />
 							{this.props.user.name.first + " " + this.props.user.name.last}
 						</Link>
