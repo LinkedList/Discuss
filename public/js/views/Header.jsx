@@ -1,3 +1,4 @@
+/* jshint node:true */
 "use strict";
 var React = require('react');
 var Router = require('react-router');
@@ -7,6 +8,7 @@ var Header = React.createClass({
 	mixins: [State],
 	render: function () {
 		var user = this.props.user;
+		user._id = user._id || "";
 		return (
 			<div className="header pure-menu pure-menu-horizontal">
 				<Link to="app" className="pure-menu-heading">{this.props.appName}</Link>
@@ -20,7 +22,7 @@ var Header = React.createClass({
 				</ul>
 				<ul className="right pure-menu-list">
 					<li className="pure-menu-item">
-						<Link to="profile" className="link user-info">
+						<Link to="user" params={{id: user._id}} className="link user-info">
 							<img className="user-image" src={typeof user !== "undefined" ? user.picture.thumbnail : "#"} />
 							{this.props.user.name.first + " " + this.props.user.name.last}
 						</Link>

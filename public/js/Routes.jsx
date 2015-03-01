@@ -14,7 +14,7 @@ var routes = (
 		<DefaultRoute handler={Posts} />
 		<Route name="posts2" handler={Posts} />
 		<Route name="about" handler={About} />
-		<Route name="profile" handler={Profile} />
+		<Route name="user" path="/user/:id" handler={Profile} />
 	</Route>
 );
 
