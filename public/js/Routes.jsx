@@ -6,12 +6,14 @@ var {RouteHandler, Route, Link, State, DefaultRoute} = Router;
 
 var About = require('./views/About.jsx');
 var Posts = require('./views/Posts.jsx');
+var Threads = require('./views/Threads.jsx');
 var Profile = require('./views/Profile.jsx');
 var App = require('./views/App.jsx');
 
 var routes = (
 	<Route name="app" path="/" handler={App}>
 		<DefaultRoute handler={Posts} />
+		<Route name="threads" handler={Threads} />
 		<Route name="posts2" handler={Posts} />
 		<Route name="about" handler={About} />
 		<Route name="user" path="/user/:id" handler={Profile} />

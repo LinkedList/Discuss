@@ -13,8 +13,8 @@ var Header = React.createClass({
 			<div className="header pure-menu pure-menu-horizontal">
 				<Link to="app" className="pure-menu-heading">{this.props.appName}</Link>
 				<ul className="pure-menu-list">
-					<li className={this.activeRoute('posts2')}>
-						<Link to="posts2" className="link">Posts</Link>
+					<li className={this.activeRoute('threads')}>
+						<Link to="threads" className="link">Threads</Link>
 					</li>
 					<li className={this.activeRoute('about')}>
 						<Link to="about" className="link">About</Link>
