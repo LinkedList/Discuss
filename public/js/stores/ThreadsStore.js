@@ -2,11 +2,16 @@
 "use strict";
 var Reflux = require('reflux');
 var ThreadsActions = require('../actions/ThreadsActions');
-var GeneralStoreMixin = require('../mixins/GeneralStoreMixin');
 
 var ThreadsStore = Reflux.createStore({
-	mixins: [GeneralStoreMixin('threads')],
-	listenables: [ThreadsActions]
+	listenables: [ThreadsActions],
+	onLoadCompleted: function (threads) {
+		this.trigger(threads);
+	},
+
+	onLoadFailed: function (response) {
+		console.error(response);
+	}
 });
 
 module.exports = ThreadsStore;
