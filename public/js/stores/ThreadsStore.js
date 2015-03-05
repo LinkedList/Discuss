@@ -5,12 +5,22 @@ var ThreadsActions = require('../actions/ThreadsActions');
 
 var ThreadsStore = Reflux.createStore({
 	listenables: [ThreadsActions],
+
+	init: function () {
+		this.threads = [];
+	},
 	onLoadCompleted: function (threads) {
-		this.trigger(threads);
+		this.threads = threads;
+		this.trigger(this.threads);
 	},
 
 	onLoadFailed: function (response) {
 		console.error(response);
+	},
+
+	onCreateCompleted: function (thread) {
+		this.threads.push(thread);
+		this.trigger(this.threads);
 	}
 });
 

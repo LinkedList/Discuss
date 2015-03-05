@@ -1,3 +1,4 @@
+/* jshint node: true */
 "use strict";
 var Reflux = require('reflux');
 var request = require('superagent');
@@ -5,6 +6,10 @@ var SessionActions = require('../actions/SessionActions');
 
 var SessionStore = Reflux.createStore({
 	listenables: [SessionActions],
+
+	init: function () {
+		this.user = {};
+	},
 
 	onGetUser: function (name) {
 		var _this = this;
@@ -15,9 +20,14 @@ var SessionStore = Reflux.createStore({
 					console.error(err);
 					return;
 				}
-				_this.trigger(res.body);
+				_this.user = res.body;
+				_this.trigger(_this.user);
 			});
 	},
+
+	current: function() {
+		return this.user;
+	}
 });
 
 module.exports = SessionStore;
