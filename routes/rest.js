@@ -1,15 +1,11 @@
+/* jshint node:true */
+"use strict";
 var express = require('express');
 var router = express.Router();
+var sendErrorOrResponse = require('../utils/responseUtil').simple;
 
 var restRoute = function (db, col) {
   var basicDb = require('../models/basicCollectionModel')(db, col);
-
-  var sendErrorOrResponse = function (err, doc) {
-      if(err) {
-        return this.res.send(err);
-      }
-      this.res.json(doc);
-  }
 
   /* GET collection */
   router.get('/' + col + '/', function find(req, res, next) {

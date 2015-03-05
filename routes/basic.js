@@ -7,20 +7,18 @@ var seeder = require('../models/seeder');
 var ObjectId = require('mongojs').ObjectId;
 var properties = require('../config/properties');
 var authRoutes = require('./auth');
+var sendErrorOrResponse = require('../utils/responseUtil').simple;
 
 var routes = function (db) {
+  var usersCol = db.collection('users');
+  var postsCol = db.collection('posts');
 
   router.use('/', authRoutes);
 
   router.get('/user', requiresLogin, function (req, res) {
-    var usersCol = db.collection('users');
-    usersCol.findOne({_id: new ObjectId(req.session.passport.user)}, function (err, user) {
-      if(err) {
-        return res.send(err);
-      }
-
-      res.json(user);
-    });
+    usersCol.findOne({_id: new ObjectId(req.session.passport.user)},
+        sendErrorOrResponse.bind({res: res})
+    );
   });
 
   router.get('/', requiresLogin, function (req, res) {
@@ -29,54 +27,30 @@ var routes = function (db) {
 
   router.get('/seeder/users/:number', requiresLogin, function (req, res) {
     seeder.users(function(users) {
-      var usersCol = db.collection('users');
-      usersCol.insert(users, function (err, docs) {
-        if(err) {
-          return res.send(err);
-        }
-
-        res.json(users);
-      });
-
+      usersCol.insert(users, sendErrorOrResponse.bind({res: res}));
     }, req.params.number);
   });
 
   router.get('/seeder/post/:user_id', requiresLogin, function (req, res) {
-    var usersCol = db.collection('users');
     usersCol.findOne({_id: new ObjectId(req.params.user_id)}, function (err, user) {
       if(err) {
         return res.send(err);
       }
 
       seeder.post(function(post){
-        var postsCol = db.collection('posts');
-        postsCol.insert(post, function (err, doc) {
-          if(err) {
-            return res.send(err);
-          }
-
-          res.json(doc);
-        });
+        postsCol.insert(post, sendErrorOrResponse.bind({res: res}));
       }, user);
     });
   });
 
   router.get('/seeder/randompost', requiresLogin, function (req, res) {
-    var usersCol = db.collection('users');
     usersCol.find({}, function (err, users) {
       if(err) {
         return res.send(err);
       }
 
       seeder.randomPost(function(post){
-        var postsCol = db.collection('posts');
-        postsCol.insert(post, function (err, doc) {
-          if(err) {
-            return res.send(err);
-          }
-
-          res.json(doc);
-        });
+        postsCol.insert(post, sendErrorOrResponse.bind({res: res}));
       }, users);
     });
   });
