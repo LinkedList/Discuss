@@ -3,6 +3,7 @@
 var React = require('react');
 var Reflux = require('reflux');
 
+var Navigation = require('react-router').Navigation;
 var ThreadsStore = require('../stores/ThreadsStore');
 var ThreadsActions = require('../actions/ThreadsActions');
 var SessionStore = require('../stores/SessionStore');
@@ -12,14 +13,18 @@ var _ = require('lodash');
 
 var Threads = React.createClass({
 	mixins: [
-		Reflux.listenTo(ThreadsStore, "onThreadsChange")
+		Reflux.listenTo(ThreadsStore, "onThreadsChange"),
+		Navigation
 	],
 
 	onThreadsChange: function (threads) {
 		this.setState({
 			threads: threads
 		});
-		this.refs.name.getDOMNode().value = "";
+	},
+
+	onNewThread: function () {
+		this.transitionTo('new-thread');
 	},
 
 	getInitialState: function () {
@@ -34,32 +39,15 @@ var Threads = React.createClass({
 		return (
 			<div>
 				<h1>Latest threads</h1>
+				<button onClick={this.onNewThread} className="pure-button pure-button-primary">New Thread</button>
 				<ul>
 					{this.state.threads.map(function(t){
 						return <li>{t.name}</li>;	
 					})}
 				</ul>
-				<div>
-					Create a new thread:
-				</div>
-				<form>
-					<input type="text" ref="name" />
-					<input type="button" value="Create" onClick={this.onClick}/>
-				</form>
 			</div>
 		);
-	},
-
-	onClick: function () {
-		var name = this.refs.name.getDOMNode().value;
-		var userId = SessionStore.current()._id;
-		ThreadsActions.create({
-			name: name,
-			userId: userId,
-			timestamp: new Date()
-		});
-	}
-	
+	}	
 });
 
 module.exports = Threads;
