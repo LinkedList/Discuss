@@ -13,9 +13,16 @@ var postsM = function (db) {
     });
   };
 
+  var findWhere = function (where, call) {
+    pCol.find(where, function (err, docs) {
+      call(err, docs);
+    });
+  };
+
   return {
     find: basicDb.find,
     findSort: findSort,
+    findWhere: findWhere,
     findOne: basicDb.findOne,
     create: basicDb.create,
     update: basicDb.update,

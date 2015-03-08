@@ -33,9 +33,26 @@ var threadsM = function (db) {
     });
   };
 
+  var findOne = function (_id, call) {
+    basicDb.findOne(_id, function (err, thread) {
+      if(err) {
+        call(err);
+      }
+
+      postsM.findWhere({thread_id: new ObjectId(_id)}, function (err, posts) {
+        if(err) {
+          call(err);
+        }
+
+        thread.posts = posts;
+        call(null, thread);
+      });
+    });
+  };
+
   return {
     find: basicDb.find,
-    findOne: basicDb.findOne,
+    findOne: findOne,
     create: create,
     update: basicDb.update,
     delete: basicDb.delete
