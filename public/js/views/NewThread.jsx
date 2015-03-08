@@ -34,16 +34,18 @@ var NewThread = React.createClass({
 		);
 	},
 
-	onSubmit: function () {
+	onSubmit: function (e) {
+		e.preventDefault();
 		var name = this.refs.name.getDOMNode().value;
+		var post_text = this.refs.post_text.getDOMNode().value;
 		var userId = SessionStore.current()._id;
 		ThreadsActions.create({
 			name: name,
-			userId: userId,
+			user_id: userId,
+			post: post_text,
 			timestamp: new Date()
 		});
 	}
-	
 });
 
 module.exports = NewThread;
