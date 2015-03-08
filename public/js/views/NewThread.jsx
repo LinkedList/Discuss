@@ -28,7 +28,7 @@ var NewThread = React.createClass({
 					<input className="new-thread-name" type="text" id="name" ref="name" />
 					<label for="post-text">Thread text</label>
 					<textarea rows="10" className="new-thread-text" id="post-text" ref="post_text"></textarea>
-					<button type="submit" className="pure-button pure-button-primary" onClick={this.onSubmit}>Create</button>
+					<button type="submit" className="pure-button pure-button-primary new-thread-create-button" onClick={this.onSubmit}>Create</button>
 				</form>
 			</div>
 		);
