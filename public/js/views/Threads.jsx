@@ -39,7 +39,7 @@ var Threads = React.createClass({
 		return (
 			<div>
 				<h1 className="threads-header">Latest threads</h1>
-				<button onClick={this.onNewThread} className="new-thread pure-button pure-button-primary">New Thread</button>
+				<button onClick={this.onNewThread} className="new-thread pure-button pure-button-primary"><i className="plus"></i> New Thread</button>
 				<ul className="threads">
 					{this.state.threads.map(function(t){
 						return <li>{t.name}: {new Date(t.timestamp).toDateString()}</li>;	
