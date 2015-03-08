@@ -26,13 +26,14 @@ var routes = function (db) {
   });
 
 
-  var API_ROUTES = ['index', 'posts', 'groups', 'users'];
+  var API_ROUTES = ['index', 'groups', 'users'];
 
   API_ROUTES.forEach(function(route) {
     router.use('/api', requiresLogin, require('./rest')(db, route));
   });
 
   router.use('/api', requiresLogin, require('./threads')(db));
+  router.use('/api', requiresLogin, require('./posts')(db));
 
   return router;
 };
