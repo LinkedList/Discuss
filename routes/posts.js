@@ -15,6 +15,13 @@ var postsRoutes = function (db) {
     );
   });
 
+  router.get('/' + col + '/sortTime' , function(req, res, next) {
+    postsM.findSort(
+      {timestamp:1},
+      sendErrorOrResponse.bind({res: res})
+    );
+  });
+
   /* GET one document */
   router.get('/' + col + '/:id', function findOne(req, res, next) {
     postsM.findOne(req.params.id,
@@ -43,6 +50,7 @@ var postsRoutes = function (db) {
        sendErrorOrResponse.bind({res: res})
     );
   });
+
 
   return router;
 };
