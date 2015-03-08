@@ -10,7 +10,6 @@ var sendErrorOrResponse = require('../utils/responseUtil').simple;
 
 var routes = function (db) {
   var usersCol = db.collection('users');
-  var postsCol = db.collection('posts');
   var seederRoutes = require('./seeder')(db);
 
   router.use('/', authRoutes);
@@ -27,11 +26,13 @@ var routes = function (db) {
   });
 
 
-  var API_ROUTES = ['index', 'threads', 'posts', 'groups', 'users'];
+  var API_ROUTES = ['index', 'posts', 'groups', 'users'];
 
   API_ROUTES.forEach(function(route) {
     router.use('/api', requiresLogin, require('./rest')(db, route));
   });
+
+  router.use('/api', requiresLogin, require('./threads')(db));
 
   return router;
 };
