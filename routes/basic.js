@@ -15,13 +15,13 @@ var routes = function (db) {
   router.use('/', authRoutes);
   router.use('/seeder', seederRoutes);
 
-  router.get('/user', requiresLogin, function (req, res) {
+  router.get('/user', function (req, res) {
     usersCol.findOne({_id: new ObjectId(req.session.passport.user)},
         sendErrorOrResponse.bind({res: res})
     );
   });
 
-  router.get('/', requiresLogin, function (req, res) {
+  router.get('/', function (req, res) {
     res.render('index');
   });
 
@@ -29,11 +29,11 @@ var routes = function (db) {
   var API_ROUTES = ['index', 'groups', 'users'];
 
   API_ROUTES.forEach(function(route) {
-    router.use('/api', requiresLogin, require('./rest')(db, route));
+    router.use('/api', require('./rest')(db, route));
   });
 
-  router.use('/api', requiresLogin, require('./threads')(db));
-  router.use('/api', requiresLogin, require('./posts')(db));
+  router.use('/api', require('./threads')(db));
+  router.use('/api', require('./posts')(db));
 
   return router;
 };

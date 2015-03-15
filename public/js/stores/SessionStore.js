@@ -20,14 +20,26 @@ var SessionStore = Reflux.createStore({
 					console.error(err);
 					return;
 				}
-				_this.user = res.body;
+
+				_this.user = !res.body ? _this.getEmptyUser(): res.body;
 				_this.trigger(_this.user);
 			});
 	},
 
 	current: function() {
 		return this.user;
+	},
+
+	getEmptyUser: function () {
+		return {
+				_id: null,
+				name: {first: "", last: ""},
+				picture: {
+					thumbnail: "#"
+				}
+			};
 	}
+
 });
 
 module.exports = SessionStore;
