@@ -8,7 +8,8 @@ var API_URL = '/api/threads';
 
 var ThreadsActions = Reflux.createActions({
 		"load": {children: ["completed", "failed"]},
-		"create": {children: ["completed", "failed"]}
+		"create": {children: ["completed", "failed"]},
+		"get": {children: ["completed", "failed"]}
 });
 
 ThreadsActions.load.listen(function() {
@@ -28,6 +29,18 @@ ThreadsActions.create.listen(function(thread) {
 	request
 		.post('/api/threads')
 		.send(thread)
+		.end(function(err, res){
+			if(err) {
+				_this.failed(err);
+			}
+			_this.completed(res.body);
+		});
+});
+
+ThreadsActions.get.listen(function(thread) {
+	var _this = this;
+	request
+		.get('/api/threads/' + thread)
 		.end(function(err, res){
 			if(err) {
 				_this.failed(err);

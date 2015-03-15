@@ -3,26 +3,28 @@
 
 var React = require('react');
 var Reflux = require('reflux');
+var Navigation = require('react-router').Navigation;
 
 var ThreadItem = React.createClass({
+	mixins: [
+		Navigation
+	],
 	render: function () {
-		var date = new Date(this.props.timestamp);
-		var user = this.props.user;
+		var thread = this.props.thread;
 		return (
-				<div className="front-post">
-					<span className="front-post-text">
-						{this.props.text}
-					</span>
-					<img className="front-post-user-image" src={typeof user !== 'undefined' ? user.picture.thumbnail : "#"} />
-					<span className="front-post-user">
-						{typeof user !== 'undefined' ? user.name.first + " " + user.name.last : "Undefined"}
-					</span>
-					<span className="front-post-date">
-						{date.toDateString()}
-					</span>
-				</div>
+				<li className="thread-item">
+					<a href="#" className="thread-item-header" onClick={this.onThreadClick}>
+						{thread.name}
+					</a>
+					<div className="thread-item-timestamp">{new Date(thread.timestamp).toDateString()}</div>
+				</li>
 		);
-	}
+	},
+
+	onThreadClick: function (e) {
+		e.preventDefault();
+		this.transitionTo('thread', {id: this.props.thread._id});
+	},
 });
 
 module.exports = ThreadItem;
