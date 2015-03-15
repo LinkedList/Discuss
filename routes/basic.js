@@ -15,7 +15,7 @@ var routes = function (db) {
   router.use('/', authRoutes);
   router.use('/seeder', seederRoutes);
 
-  router.get('/user', function (req, res) {
+  router.get('/user', requiresLogin, function (req, res) {
     usersCol.findOne({_id: new ObjectId(req.session.passport.user)},
         sendErrorOrResponse.bind({res: res})
     );

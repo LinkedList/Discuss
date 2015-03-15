@@ -18,6 +18,8 @@ var SessionStore = Reflux.createStore({
 			.end(function(err, res){
 				if(err) {
 					console.error(err);
+					_this.user = _this.getEmptyUser();
+					_this.trigger(_this.user);
 					return;
 				}
 

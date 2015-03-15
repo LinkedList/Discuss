@@ -3,6 +3,7 @@
 var express = require('express');
 var router = express.Router();
 var sendErrorOrResponse = require('../utils/responseUtil').simple;
+var requiresLogin = require('../middlewares/login').requiresLogin;
 
 var restRoute = function (db, col) {
   var basicDb = require('../models/basicCollectionModel')(db, col);
@@ -22,7 +23,7 @@ var restRoute = function (db, col) {
   });
 
   /* POST create document */
-  router.post('/' + col + '/', function save(req, res, next) {
+  router.post('/' + col + '/', requiresLogin, function save(req, res, next) {
     basicDb.create(req.body,
        sendErrorOrResponse.bind({res: res})
     );
@@ -30,14 +31,14 @@ var restRoute = function (db, col) {
 
 
   /* POST update document */
-  router.post('/' + col + '/:id', function findOne(req, res, next) {
+  router.post('/' + col + '/:id', requiresLogin, function findOne(req, res, next) {
     basicDb.update(req.params.id, req.body,
        sendErrorOrResponse.bind({res: res})
     );
   });
 
   /* DELETE a document */
-  router.delete('/' + col + '/:id', function del(req, res, next) {
+  router.delete('/' + col + '/:id', requiresLogin, function del(req, res, next) {
     basicDb.delete(req.params.id,
        sendErrorOrResponse.bind({res: res})
     );
