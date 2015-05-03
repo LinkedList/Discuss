@@ -18,7 +18,7 @@ var passportConfig = function(db) {
            }
 
            if(!user) {
-               var icon = profile.photos === undefined ? "/img/default_user.png" : profile.photos[0];
+               var icon = profile.photos === undefined ? "/img/default_user.png" : profile.photos[0].value;
                user = {
                    name: {
                        first: profile.name.givenName,
