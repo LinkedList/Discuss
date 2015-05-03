@@ -1,4 +1,4 @@
-var GoogleStrategy = require('passport-google').Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var passport = require('passport');
 var properties = require('./properties');
 var ObjectId = require('mongojs').ObjectId;
@@ -6,12 +6,13 @@ var ObjectId = require('mongojs').ObjectId;
 var passportConfig = function(db) {
     var users = db.collection('users');
     passport.use(new GoogleStrategy({
-        returnURL: properties.base + '/auth/google/return',
-        realm: properties.base
+        clientID: properties.gId,
+        clientSecret: properties.gSec,
+        callbackURL: properties.base + '/auth/google/return',
     },
-    function(identifier, profile, done) {
+    function(accessToken, refreshToken, profile, done) {
 
-       users.findOne({googleId: identifier}, function (err, user) {
+       users.findOne({googleId: profile.id}, function (err, user) {
            if(err) {
                return done(err);
            }
@@ -27,7 +28,7 @@ var passportConfig = function(db) {
                        thumbnail: icon
                    },
                    email: profile.emails[0].value,
-                   googleId: identifier
+                   googleId: profile.id
                };
 
                users.save(user, function(err, user) {

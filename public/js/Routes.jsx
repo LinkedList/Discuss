@@ -16,8 +16,8 @@ var routes = (
 	<Route name="app" path="/" handler={App}>
 		<DefaultRoute handler={Posts} />
 		<Route name="threads" path="/threads" handler={Threads} />
-		<Route name="thread" path="/threads/:id" handler={Thread} />
 		<Route name="new-thread" path="/threads/new" handler={NewThread} />
+		<Route name="thread" path="/threads/:id" handler={Thread} />
 		<Route name="posts2" handler={Posts} />
 		<Route name="about" handler={About} />
 		<Route name="user" path="/user/:id" handler={Profile} />

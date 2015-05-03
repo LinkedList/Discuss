@@ -3,7 +3,7 @@
 var router = require('express').Router();
 var passport = require('passport');
 
-router.get('/auth/google', passport.authenticate('google'));
+router.get('/auth/google', passport.authenticate('google', {scope: "openid email"}));
 router.get('/auth/google/return', passport.authenticate('google', {
   successRedirect: '/',
   failureRedirect: '/login'
